@@ -10,7 +10,6 @@ rockchip_setup_interfaces()
 	case "$board" in
 	embedfire,doornet1|\
 	embedfire,doornet2|\
-	embedfire,lubancat1|\
 	embedfire,lubancat1n|\
 	embedfire,lubancat2|\
 	hinlink,opc-h66k|\
@@ -23,6 +22,9 @@ rockchip_setup_interfaces()
 		;;
 	friendlyarm,nanopi-r5s)
 		ucidef_set_interfaces_lan_wan "eth1 eth2" "eth0"
+		;;
+	embedfire,lubancat1)
+		ucidef_set_interfaces_lan_wan "eth0" "wwan0"
 		;;
 	hinlink,opc-h68k|\
 	hinlink,opc-h69k|\

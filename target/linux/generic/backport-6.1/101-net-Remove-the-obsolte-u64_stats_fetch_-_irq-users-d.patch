@@ -117,7 +117,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static void ena_queue_stats(struct ena_adapter *adapter, u64 **data)
 --- a/drivers/net/ethernet/amazon/ena/ena_netdev.c
 +++ b/drivers/net/ethernet/amazon/ena/ena_netdev.c
-@@ -3308,10 +3308,10 @@ static void ena_get_stats64(struct net_d
+@@ -3312,10 +3312,10 @@ static void ena_get_stats64(struct net_d
  		tx_ring = &adapter->tx_ring[i];
  
  		do {
@@ -130,7 +130,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  
  		stats->tx_packets += packets;
  		stats->tx_bytes += bytes;
-@@ -3319,20 +3319,20 @@ static void ena_get_stats64(struct net_d
+@@ -3323,20 +3323,20 @@ static void ena_get_stats64(struct net_d
  		rx_ring = &adapter->rx_ring[i];
  
  		do {
@@ -157,7 +157,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	stats->tx_dropped = tx_drops;
 --- a/drivers/net/ethernet/aquantia/atlantic/aq_ring.c
 +++ b/drivers/net/ethernet/aquantia/atlantic/aq_ring.c
-@@ -948,7 +948,7 @@ unsigned int aq_ring_fill_stats_data(str
+@@ -957,7 +957,7 @@ unsigned int aq_ring_fill_stats_data(str
  		/* This data should mimic aq_ethtool_queue_rx_stat_names structure */
  		do {
  			count = 0;
@@ -166,7 +166,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  			data[count] = self->stats.rx.packets;
  			data[++count] = self->stats.rx.jumbo_packets;
  			data[++count] = self->stats.rx.lro_packets;
-@@ -965,15 +965,15 @@ unsigned int aq_ring_fill_stats_data(str
+@@ -974,15 +974,15 @@ unsigned int aq_ring_fill_stats_data(str
  			data[++count] = self->stats.rx.xdp_tx;
  			data[++count] = self->stats.rx.xdp_invalid;
  			data[++count] = self->stats.rx.xdp_redirect;
@@ -689,7 +689,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  	*data += size;
 --- a/drivers/net/ethernet/intel/i40e/i40e_main.c
 +++ b/drivers/net/ethernet/intel/i40e/i40e_main.c
-@@ -419,10 +419,10 @@ static void i40e_get_netdev_stats_struct
+@@ -425,10 +425,10 @@ static void i40e_get_netdev_stats_struct
  	unsigned int start;
  
  	do {
@@ -702,7 +702,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  
  	stats->tx_packets += packets;
  	stats->tx_bytes   += bytes;
-@@ -472,10 +472,10 @@ static void i40e_get_netdev_stats_struct
+@@ -478,10 +478,10 @@ static void i40e_get_netdev_stats_struct
  		if (!ring)
  			continue;
  		do {
@@ -715,7 +715,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  
  		stats->rx_packets += packets;
  		stats->rx_bytes   += bytes;
-@@ -897,10 +897,10 @@ static void i40e_update_vsi_stats(struct
+@@ -903,10 +903,10 @@ static void i40e_update_vsi_stats(struct
  			continue;
  
  		do {
@@ -728,7 +728,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  		tx_b += bytes;
  		tx_p += packets;
  		tx_restart += p->tx_stats.restart_queue;
-@@ -915,10 +915,10 @@ static void i40e_update_vsi_stats(struct
+@@ -921,10 +921,10 @@ static void i40e_update_vsi_stats(struct
  			continue;
  
  		do {
@@ -741,7 +741,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  		rx_b += bytes;
  		rx_p += packets;
  		rx_buf += p->rx_stats.alloc_buff_failed;
-@@ -935,10 +935,10 @@ static void i40e_update_vsi_stats(struct
+@@ -941,10 +941,10 @@ static void i40e_update_vsi_stats(struct
  				continue;
  
  			do {
@@ -1806,7 +1806,7 @@ Signed-off-by: Jakub Kicinski <kuba@kernel.org>
  static int
 --- a/drivers/net/team/team.c
 +++ b/drivers/net/team/team.c
-@@ -1866,13 +1866,13 @@ team_get_stats64(struct net_device *dev,
+@@ -1868,13 +1868,13 @@ team_get_stats64(struct net_device *dev,
  	for_each_possible_cpu(i) {
  		p = per_cpu_ptr(team->pcpu_stats, i);
  		do {
